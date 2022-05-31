@@ -1,4 +1,3 @@
-// @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require("prism-react-renderer/themes/github");
@@ -16,11 +15,12 @@ const config = {
   organizationName: "marklawlor", // Usually your GitHub org/user name.
   projectName: "tailwindcss-react-native", // Usually your repo name.
 
+  clientModules: [
+    require.resolve("./vendor/remark-snackplayer/snackPlayerInitializer.js"),
+  ],
   scripts: [
-    {
-      src: "https://cdn.splitbee.io/sb.js",
-      async: true,
-    },
+    { src: "https://cdn.splitbee.io/sb.js", defer: true },
+    { src: "https://snack.expo.dev/embed.js", defer: true },
   ],
 
   presets: [
@@ -31,6 +31,7 @@ const config = {
         docs: {
           routeBasePath: "/", // disable landing page
           sidebarPath: require.resolve("./sidebars.js"),
+          remarkPlugins: [require("./vendor/remark-snackplayer")],
         },
         blog: false,
         theme: {
