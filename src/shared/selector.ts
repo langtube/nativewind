@@ -11,7 +11,10 @@ export function normalizeSelector(
 ) {
   const leadingDots = "^\\.";
   const leadingChild = "^>";
-  const nonWordCharactersExceptDash = new RegExp("[^a-zA-Z0-9-]+", "g");
+  const nonWordCharactersExceptDashAndSpaces = new RegExp(
+    "[^a-zA-Z0-9-\\s]+",
+    "g"
+  );
 
   if (important) {
     selector = selector.replace(new RegExp(`^${important}`), "");
@@ -21,5 +24,5 @@ export function normalizeSelector(
     .trim()
     .replace(new RegExp(leadingDots), "")
     .replace(new RegExp(leadingChild), "")
-    .replace(nonWordCharactersExceptDash, "_");
+    .replace(nonWordCharactersExceptDashAndSpaces, "_");
 }
